@@ -1,4 +1,4 @@
-package com.crib;
+package com.crib.deck;
 
 /**
  * Created by Aaron on 1/25/2017.

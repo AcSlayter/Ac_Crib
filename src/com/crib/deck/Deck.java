@@ -1,4 +1,4 @@
-package com.crib;
+package com.crib.deck;
 
 import java.util.ArrayList;
 import java.util.List;

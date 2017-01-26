@@ -1,9 +1,9 @@
-package com.crib;
+package com.crib.deck;
 
+import com.crib.deck.Card;
+import com.crib.deck.Deck;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static junit.framework.Assert.*;
 
 /**
  * Created by Aaron on 1/25/2017.
