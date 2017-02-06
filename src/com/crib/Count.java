@@ -22,32 +22,26 @@ public class Count {
     }
 
     public int getScore(){
-        List<Card> tmp = new ArrayList<Card>(inplay);
 
-        if(tmp.size() > 0){
-            return getScoreHelper(tmp.remove(0),tmp, 0);
-        }
+        return getRunScore() + getPairScore() + getFifteenScore() + getFlushScore() + getNibsScore();
+    }
+
+    public int getRunScore(){
         return 0;
     }
 
-    private int getScoreHelper(Card main, List<Card> card, int points){
-        if (card.size() == 0){
-            return points;
-        }
-        int total = main.getCardValue().ordinal();
-
-        for(int i = 0; i < card.size() && total <= 15; i++){
-            total = card.get(i).getCardValue().ordinal() + total ;
-            if(total == 15){
-                points = points + 2;
-            }
-        }
-
-        card.remove(0);
-        points =  getScoreHelper(main, card, points);
-
-        return points;
+    public int getPairScore(){
+        return 0;
     }
 
+    public int getFifteenScore() {
+        return 0;
+    }
+    public int getFlushScore(){
+        return 0;
+    }
 
+    public int getNibsScore(){
+        return 0;
+    }
 }
