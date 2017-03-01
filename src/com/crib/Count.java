@@ -3,6 +3,7 @@ package com.crib;
 import com.crib.deck.Card;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -11,37 +12,41 @@ import java.util.List;
 public class Count {
 
 
-    private List<Card> inplay = null;
+    public Count() {
 
-    public Count(List<Card> inplay) {
-        this.inplay = inplay;
-    }
-
-    public void setInplay(List<Card> inplay) {
-        this.inplay = inplay;
     }
 
     public int getScore(){
 
-        return getRunScore() + getPairScore() + getFifteenScore() + getFlushScore() + getNibsScore();
-    }
-
-    public int getRunScore(){
+//        return getRunScore() + getPairScore() + getFifteenScore() + getFlushScore() + getNibsScore();
         return 0;
     }
 
-    public int getPairScore(){
+
+    public int getPair(Card a, Card b){
+        if(a == b){
+            return 2;
+        }
         return 0;
     }
 
-    public int getFifteenScore() {
-        return 0;
-    }
-    public int getFlushScore(){
+    public int getRun(List<Card> inPlay){
+        int count = 0;
+
+        inPlay.sort( new Card.CardNumberCompararor() );
+
+        for( int i = 1 ; i < inPlay.size() ; i++ ) {
+            if(inPlay.get(i-1).getCardValue().ordinal() + 1 != inPlay.get(i).getCardValue().ordinal()) {
+                count = 0;
+            }else{
+                count++;
+            }
+        }
+        if(count >= 2){
+            return count+1;
+        }
+
         return 0;
     }
 
-    public int getNibsScore(){
-        return 0;
-    }
 }

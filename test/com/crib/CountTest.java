@@ -14,18 +14,81 @@ import java.util.List;
  */
 public class CountTest {
     @Test
-    public void testFifteenTwo() throws Exception {
+    public void testRunLeadingInvalid(){
         List<Card> cards = new ArrayList<Card>();
 
+        cards.add(new Card(Suit.CLUB, CardValue.TEN));
+        cards.add(new Card(Suit.CLUB, CardValue.EIGHT));
+        cards.add(new Card(Suit.CLUB, CardValue.NINE));
         cards.add(new Card(Suit.CLUB, CardValue.FIVE));
+
+        Count temp = new Count();
+        int points = temp.getRun(cards);
+
+        Assert.assertEquals(points,3);
+    }
+
+    @Test
+    public void testRunTrailingInvalid(){
+        List<Card> cards = new ArrayList<Card>();
+
+        cards.add(new Card(Suit.CLUB, CardValue.TEN));
+        cards.add(new Card(Suit.CLUB, CardValue.EIGHT));
+        cards.add(new Card(Suit.CLUB, CardValue.NINE));
+        cards.add(new Card(Suit.CLUB, CardValue.QUEEN));
+
+        Count temp = new Count();
+        int points = temp.getRun(cards);
+
+        Assert.assertEquals(points,3);
+    }
+
+    @Test
+    public void testRunWraping(){
+        List<Card> cards = new ArrayList<Card>();
+
+        cards.add(new Card(Suit.CLUB, CardValue.ACE));
+        cards.add(new Card(Suit.CLUB, CardValue.TWO));
+        cards.add(new Card(Suit.CLUB, CardValue.KING));
+        cards.add(new Card(Suit.CLUB, CardValue.QUEEN));
+
+        Count temp = new Count();
+        int points = temp.getRun(cards);
+
+        Assert.assertEquals(points,0);
+    }
+
+    @Test
+    public void testRunAll(){
+        List<Card> cards = new ArrayList<Card>();
+
+        cards.add(new Card(Suit.CLUB, CardValue.ACE));
+        cards.add(new Card(Suit.CLUB, CardValue.KING));
+        cards.add(new Card(Suit.CLUB, CardValue.QUEEN));
+        cards.add(new Card(Suit.CLUB, CardValue.TWO));
+
+        Count temp = new Count();
+        int points = temp.getRun(cards);
+
+        Assert.assertEquals(points,3);
+    }
+
+    @Test
+    public void testSort(){
+        List<Card> cards = new ArrayList<Card>();
+
+        cards.add(new Card(Suit.CLUB, CardValue.TEN));
         cards.add(new Card(Suit.CLUB, CardValue.SIX));
         cards.add(new Card(Suit.CLUB, CardValue.NINE));
-        cards.add(new Card(Suit.CLUB, CardValue.TEN));
+        cards.add(new Card(Suit.CLUB, CardValue.FIVE));
 
-        List<Card> hand = cards;
+        Card.CardNumberCompararor cardNumberCompar = new Card.CardNumberCompararor();
+        cards.sort(cardNumberCompar);
 
-        Count count = new Count(hand);
-        Assert.assertEquals(2, count.getScore());
+        Assert.assertEquals(cards.get(0).getCardValue(), CardValue.FIVE);
+        Assert.assertEquals(cards.get(1).getCardValue(), CardValue.SIX);
+        Assert.assertEquals(cards.get(2).getCardValue(), CardValue.NINE);
+        Assert.assertEquals(cards.get(3).getCardValue(), CardValue.TEN);
     }
 }
 
